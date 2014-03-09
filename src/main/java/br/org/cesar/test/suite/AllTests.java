@@ -8,7 +8,6 @@ import br.org.cesar.test.Demo2Validation;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({ 
 		Demo2Validation.class,
-//		TestSystemAbaExcecution.class
 	})
 public class AllTests {
 

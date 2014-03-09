@@ -1,5 +1,7 @@
 package br.org.cesar.common;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import junit.framework.Assert;
 
 import org.openqa.selenium.By;
@@ -8,7 +10,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
@@ -32,8 +33,12 @@ public class Demo2Page {
 		driver = Selenium.getDriver();
 		wait = new WebDriverWait(driver, 10);
 	}
+
 	
-	private static final WebElement sourceItem = driver.findElement(By.id("draggable"));
+	static WebElement sourceItem = driver.findElement(By.id("draggable"));
+	static By targetBox = By.id("droppable");
+	static By targetBoxText = By.cssSelector("#droppable > p");
+
 	
 	public Demo2Page() {
 	}
@@ -41,9 +46,13 @@ public class Demo2Page {
 	/**
 	 * Drag red box to another element
 	 */
-	public static void dragItemToLocation(WebElement element){
+	public static void dragItemToLocation(){
+		WebElement element = driver.findElement(targetBox);
 		Actions builder = new Actions(driver);
-		//Action dragAndDrop = builder.clickAndHold(redBox).moveToElement(element).release(element).build();
+//		Action dragAndDrop = builder.clickAndHold(sourceItem).
+//				moveToElement(element).
+//				release(element).
+//				build();
 		Action dragAndDrop = builder.dragAndDrop(sourceItem, element).build();
 		dragAndDrop.perform();
 	}	
@@ -61,13 +70,14 @@ public class Demo2Page {
 	 * Asserts initial text of the target item
 	 */
 	public static void assertTargetTextBeforeDrop(){
-		Assert.assertEquals("Drop here", driver.findElement(By.cssSelector("#droppable > p")).getText());
+		assertThat("Título da página Incorreto", driver.findElement(targetBoxText).getText(), is("Drop here")); 
 	}
 	
 	/**
 	 * Asserts final text of the target item
 	 */
 	public static void assertTargetTextAfterDrop(){
-		Assert.assertEquals("Dropped!", driver.findElement(By.cssSelector("#droppable > p")).getText());
+		assertThat("Título da página Incorreto", driver.findElement(targetBoxText).getText(), is("Dropped!")); 
+
 	}
 }

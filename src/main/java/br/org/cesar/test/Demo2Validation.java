@@ -1,12 +1,9 @@
 package br.org.cesar.test;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.openqa.selenium.By;
 
 import br.org.cesar.common.Demo2Page;
-import br.org.cesar.common.Property;
 
 public class Demo2Validation extends BaseTestcase{
 	/**
@@ -19,14 +16,15 @@ public class Demo2Validation extends BaseTestcase{
 	 *  Drags item to yellow block 
 	 */
 	@Test
-	public void dragToYellowBlock() {
+	public void dragToTargetBlock() {
 		Demo2Page.assertTargetTextBeforeDrop();
-		Demo2Page.dragItemToLocation(driver.findElement(By.id("droppable")));
+		Demo2Page.dragItemToLocation();
 		Demo2Page.assertTargetTextAfterDrop();
 	}
 	
 	/**
 	 *  Drags item to specified position
+	 *  10, 10 nao é suficiente para chegar ao alvo
 	 */
 	@Test
 	public void dragToSpecifiedPosition() {
