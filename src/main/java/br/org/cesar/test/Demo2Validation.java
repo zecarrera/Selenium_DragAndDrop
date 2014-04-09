@@ -1,9 +1,14 @@
 package br.org.cesar.test;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.org.cesar.common.Demo2Page;
+import br.org.cesar.util.Utils;
 
 public class Demo2Validation extends BaseTestcase{
 	/**
@@ -11,7 +16,12 @@ public class Demo2Validation extends BaseTestcase{
 	 * Simple drag and drop app
 	 */
 
-	
+	@Before
+	public void before(){
+		driver.navigate().refresh();
+		WebElement frameElement = driver.findElement(By.className("demo-frame"));
+		driver.switchTo().frame(frameElement);
+	}
 	/**
 	 *  Drags item to yellow block 
 	 */

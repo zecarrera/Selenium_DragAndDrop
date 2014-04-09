@@ -18,7 +18,6 @@ public class BaseTestcase {
 	public static void beforeClass() throws Exception {		
 		driver = Selenium.getDriver();
 		driver.navigate().to(Property.SITE_ADDRESS);
-		driver.switchTo().frame(0);
 	}
 
 	@AfterClass

@@ -12,6 +12,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import br.org.cesar.util.Utils;
+
 
 
 /*
@@ -34,8 +36,8 @@ public class Demo2Page {
 		wait = new WebDriverWait(driver, 10);
 	}
 
-	
-	static WebElement sourceItem = driver.findElement(By.id("draggable"));
+	static By sourceItemLocator = By.id("draggable");
+	static WebElement sourceItemElement = driver.findElement(sourceItemLocator);
 	static By targetBox = By.id("droppable");
 	static By targetBoxText = By.cssSelector("#droppable > p");
 
@@ -47,13 +49,14 @@ public class Demo2Page {
 	 * Drag red box to another element
 	 */
 	public static void dragItemToLocation(){
+		Utils.isVisible(sourceItemLocator);
 		WebElement element = driver.findElement(targetBox);
 		Actions builder = new Actions(driver);
 //		Action dragAndDrop = builder.clickAndHold(sourceItem).
 //				moveToElement(element).
 //				release(element).
 //				build();
-		Action dragAndDrop = builder.dragAndDrop(sourceItem, element).build();
+		Action dragAndDrop = builder.dragAndDrop(sourceItemElement, element).build();
 		dragAndDrop.perform();
 	}	
 	
@@ -61,8 +64,9 @@ public class Demo2Page {
 	 * Drag red box to another element with specific offset
 	 */
 	public static void dragItemToPosition(Integer X, Integer Y){
+		Utils.isVisible(sourceItemLocator);
 		Actions builder = new Actions(driver);
-		Action dragAndDrop = builder.dragAndDropBy(sourceItem, X, Y).build();
+		Action dragAndDrop = builder.dragAndDropBy(sourceItemElement, X, Y).build();
 		dragAndDrop.perform();
 	}
 	
